@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Simulador Inventario</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f7fa;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        canvas {
+            max-height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Dashboard de Inventario</h2>
+    <div class="dashboard">
+        <div class="card">
+            <h3>Inventario por Estado</h3>
+            <canvas id="estadoChart"></canvas>
+            <a href=""
+                style="background-color: green; color: white; padding: 8px 12px; border-radius: 6px; text-decoration: none; border: 1px solid #ccc;">
+                Exportar Excel
+            </a>
+
+        </div>
+        <div class="card">
+            <h3>Inventario por Área</h3>
+            <canvas id="areaChart"></canvas>
+            <a href="">Exportar Excel</a>
+        </div>
+        <div class="card">
+            <h3>Inventario por Regional</h3>
+            <canvas id="regionalChart"></canvas>
+            <a href="">Exportar Excel</a>
+        </div>
+
+    </div>
+
+    <script>
+        // Simulación de Inventario por Estado
+        new Chart(document.getElementById('estadoChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Asignado', 'Disponible', 'En reparación', 'Dañado'],
+                datasets: [{
+                    label: 'Equipos',
+                    data: [120, 80, 15, 5], // Datos ficticios
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(255, 205, 86, 0.7)',
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(201, 203, 207, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 205, 86, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(201, 203, 207, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Inventario por Estado'
+                    }
+                }
+            }
+        });
+
+        // Simulación Inventario por área
+        new Chart(document.getElementById('areaChart'), {
+            type: 'bar',
+            data: {
+                labels: ['IT', 'Jurídica', 'SIG', 'Contabilidad', 'Compras', 'Talento Humanos', 'CRM'],
+                datasets: [{
+                    label: 'Equipos',
+                    data: [50, 30, 40, 70, 20, 30, 70], //Datos ficticios
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 2,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Inventario por Área'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Simulación Inventario por Regional
+        new Chart(document.getElementById('regionalChart'), {
+            type: 'line',
+            data: {
+                labels: ['Bogotá', 'Medellín', 'Cali', 'Barranquilla', 'Santander'],
+                datasets: [{
+                    label: 'Equipos',
+                    data: [100, 50, 40, 30, 20],
+                    fill: true,
+                    borderColor: 'rgba(255, 159, 64, 1)',
+                    backgroundColor: 'rgba(255, 159, 64, 0.3)',
+                    tension: 0.4
+                }]
+            },
+
+
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Inventario por Regional'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+
+
+        });
+
+    </script>
+
+</body>
+
+</html>
